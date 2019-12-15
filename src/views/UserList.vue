@@ -107,6 +107,7 @@ export default Vue.extend({
       list2: []
     });
     onMounted(() => {
+      // eslint-disable-next-line
       console.log(
         "refs ---> ",
         state,
@@ -125,12 +126,14 @@ export default Vue.extend({
     watch(
       () => state.list1,
       (newList, prevList) => {
+        // eslint-disable-next-line
         console.log("list 1 changes -->", newList);
       }
     );
     watch(
       () => state.list2,
       (newList, prevList) => {
+        // eslint-disable-next-line
         console.log("list 2 changes -->", newList);
       }
     );
