@@ -1,8 +1,8 @@
 # vue-draggable-tailwind-user-card-pipline-composition-api
 
-current implementation focused on new composition-api
+current implementation focused on new vue composition-api
 
-![composition api with vuedraggable and tailwind css](https://github.com/anish2690/demo-assets/blob/master/2019-12-15%2017.39.37.gif)
+![vue composition api with vuedraggable and tailwind css](https://github.com/anish2690/demo-assets/blob/master/2019-12-15%2017.39.37.gif)
 
 ## Project setup
 
