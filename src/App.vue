@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="min-h-screen w-screen bg-white-200 flex justify-center">
     <div class="max-w-sm rounded overflow-hidden shadow-lg p-10 bg-gray-200 m-10 pipeline">
-      <div class="px-6 py-4">
+      <div class="px-6 py-4" ref="pip1Ref">
         <span
           class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
         >#photography</span>
@@ -25,7 +25,7 @@
       </draggable>
     </div>
     <div class="max-w-sm rounded overflow-hidden shadow-lg p-10 bg-gray-200 m-10 pipeline">
-      <div class="px-6 py-4">
+      <div class="px-6 py-4" ref="pip2Ref">
         <span
           class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"
         >#travel</span>
@@ -55,7 +55,7 @@
 import Vue from "vue";
 import draggable from "vuedraggable";
 import UserCard from "@/components/UserCard.vue";
-import { reactive, onMounted, ref } from "@vue/composition-api";
+import { reactive, onMounted, ref, watch } from "@vue/composition-api";
 
 interface user {
   id: number;
@@ -70,6 +70,9 @@ export default Vue.extend({
     UserCard
   },
   setup() {
+    const pip1Ref = ref(null);
+    const pip2Ref = ref(null);
+
     const state = reactive({
       list1: [
         {
@@ -104,7 +107,14 @@ export default Vue.extend({
       list2: []
     });
     onMounted(() => {
-      console.log("refs ---> ", state);
+      console.log(
+        "refs ---> ",
+        state,
+        "pipline 1 ->",
+        pip1Ref.value,
+        "pipline 2 ->",
+        pip2Ref.value
+      );
     });
     function onEdit(user: user) {
       alert(`Editing ${user.name}`);
@@ -112,11 +122,26 @@ export default Vue.extend({
     function onDelete(user: user) {
       alert(`Deleting ${user.name}`);
     }
+    watch(
+      () => state.list1,
+      (newList, prevList) => {
+        console.log("list 1 changes -->", newList);
+      }
+    );
+    watch(
+      () => state.list2,
+      (newList, prevList) => {
+        console.log("list 2 changes -->", newList);
+      }
+    );
+
     return {
       list1: state.list1,
       list2: state.list2,
       onEdit,
-      onDelete
+      onDelete,
+      pip1Ref,
+      pip2Ref
     };
   }
 });
