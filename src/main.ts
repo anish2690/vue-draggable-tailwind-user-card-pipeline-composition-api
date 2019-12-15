@@ -4,6 +4,9 @@ import router from "./router";
 import store from "./store";
 import axios from "axios";
 import "./assets/css/tailwind.css";
+import VueCompositionApi from "@vue/composition-api";
+
+Vue.use(VueCompositionApi);
 
 Vue.config.productionTip = false;
 

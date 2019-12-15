@@ -55,21 +55,22 @@
 import Vue from "vue";
 import draggable from "vuedraggable";
 import UserCard from "@/components/UserCard.vue";
+import { reactive, onMounted, ref } from "@vue/composition-api";
 
 interface user {
   id: number;
   name: string;
   avatar: string;
 }
-
+//  new composition api
 export default Vue.extend({
   name: "App",
   components: {
     draggable,
     UserCard
   },
-  data() {
-    return {
+  setup() {
+    const state = reactive({
       list1: [
         {
           id: 1,
@@ -101,22 +102,27 @@ export default Vue.extend({
         }
       ],
       list2: []
-    };
-  },
-  methods: {
-    onEdit(user: user) {
+    });
+    onMounted(() => {
+      console.log("refs ---> ", state);
+    });
+    function onEdit(user: user) {
       alert(`Editing ${user.name}`);
-    },
-    onDelete(user: user) {
+    }
+    function onDelete(user: user) {
       alert(`Deleting ${user.name}`);
     }
+    return {
+      list1: state.list1,
+      list2: state.list2,
+      onEdit,
+      onDelete
+    };
   }
 });
 </script>
 
 <style>
-/* Unfortunately @apply cannot be setup in codesandbox, 
-but you'd use "@apply border opacity-50 border-blue-500 bg-gray-200" here */
 .moving-card {
   opacity: 0.5;
   background: #f7fafc;
