@@ -12,10 +12,21 @@ const routes = [
     path: "/",
     name: "home",
     component: Home
+  },
+  {
+    path: "/userlist",
+    name: "user-list",
+    component: () => import("@/views/UserList.vue")
+  },
+  {
+    path: "/pipleline",
+    name: "pipleline",
+    component: () => import("@/views/Pipeline.vue")
   }
 ];
 
 const router = new VueRouter({
+  mode: "history",
   routes
 });
 
